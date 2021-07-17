@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "poohacharya/petclinic"
+    registry = "poohacharya/pet12"
     registryCredential = 'docker-hub'
     dockerImage = ''
   }
@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/poohacharya/petclinic.git'
+        git 'https://github.com/poohacharya/pet12.git'
       }
     }
     stage('Compile') {
