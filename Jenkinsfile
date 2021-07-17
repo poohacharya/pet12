@@ -32,14 +32,9 @@ pipeline {
     }
     stage('Building Image') {
       steps{
-        sh '''
-        mvn package
-        ls
-        pwd
-        ''' 
-        //script {
-         // dockerImage = docker.build registry + ":latest"
-        //}
+        script {
+         dockerImage = docker.build registry + ":latest"
+        }
       }
     }
     stage('Deploy Image') {
