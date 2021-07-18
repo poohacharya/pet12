@@ -44,17 +44,7 @@ pipeline {
    steps{
          sh '''
             curl -upooh.acharya@gmail.com:AP4sA8Tq1X3SB184o2FqaAFy7Rd -T target/*.jar  "https://poohacharya.jfrog.io/artifactory/default-generic-local/spring-petclinic"
-            //def server = Artifactory.newServer url: 'ARTIFACTORY_URL', username: 'ARTIFACTORY_USER_NAME', password: 'ARTIFACTORY_PASSWORD'
-            //def uploadSpec = """{
-              // "files": [
-                // { 
-                  // "pattern": "target/*.jar",
-                   //"target" : "ARTIFACTORY_TARGET_REPO",
-                 //}
-               //]
-             //}"""
-            //server.upload(uploadSpec)
-    ''' 
+        ''' 
        }
   }  
     stage('Building Image') {
