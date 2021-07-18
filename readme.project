@@ -1,24 +1,22 @@
-Build a jenkins pipeline on jenkins that uses pipeline script from SCM.
-SCM: Git
-repo url: https://github.com/poohacharya/petclinic.git
-Branch: */master
-Script path: Jenkinsfile.
-the Jenkins file will execte the following stages:
-Declarative: Checkout SCM	: checkout the source code 
-Declarative: Tool Install	: installs the required tools (maven/jdk)
-Cloning Git	: clones the git repo from remote repo.
-Compile	: compile the code 
-Test	: test the code
-Building Image	: build the docker image 
-Deploy Image: push the cokerimage to the hub
+Resolve dependencies from jcenter, make the following updates to pom.xml:
+remove the existing repository (https://repo.spring.io/milestone)
+add the center repo (https://jcenter.bintray.com)
 
 
-Pull the latest petclinic-container image from the dockerhub repository:
-docker pull <docker-hub>/spring-petclinic-hub:latest
+Jenkins Pipeline:
+Declarative: Checkout SCM	- this stage checkout the code.
+Declarative: Tool Install	- this stage installs the required tools (maven/jdk)
+Cloning Git	- this stage clones the git repo https://github.com/poohacharya/pet12
+Compile	- this stage compiles the src code.
+clean install	-  This stage will test and package the application in its distributable format, it saves it in local repository. 
+package	- This stage will test and package the application in its distributable format, it will then be used to push to artifactory
+Publish To Artifactory	- This stage will push the app.jar to artifactory.
+Building Image	- This stage will containerize the app and build the docker image.
+Deploy Image- this stage will deploy the docker image to artifactory
 
-Run the container using:
-docker run -d --name petclinic-container -p 9181:9181 <docker-hub>/spring-petclinic-hub:latest
-You can run the container's shell using:
-docker exec -it petclinic-container sh
 
+Docker  Pull:
+docker pull poohacharya.jfrog.io/default-docker-virtual/petclinic
+Docker Run:
+docker run -d --name petclinic -p 9181:9181 petclinic
 
