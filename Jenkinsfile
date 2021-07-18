@@ -65,6 +65,4 @@ pipeline {
        // Push the docker image to artifactory repo.
         }
       }
-    }
-  }
 }
