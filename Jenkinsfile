@@ -37,7 +37,7 @@ pipeline {
         ls
         pwd
         '''
-        //if the code is compiled, we test and package it in its distributable format; run IT and store in local repository
+        //if the code is compiled, we test and package it in its distributable format; run IT and store in target folder
       }
     }
    stage('Publish To Artifactory'){
@@ -45,21 +45,24 @@ pipeline {
          sh '''
             curl -upooh.acharya@gmail.com:AP4sA8Tq1X3SB184o2FqaAFy7Rd -T target/*.jar  "https://poohacharya.jfrog.io/artifactory/default-generic-local/spring-petclinic"
         ''' 
+       // Push the artifact which was built in package to artifactory repo.
        }
   }  
     stage('Building Image') {
       steps{
-        script {
-         dockerImage = docker.build registry + ":latest"
-        }
+         sh '''
+          docker build -f ./Dockerfile -t petclinic .
+         '''
+      //Build docker image
       }
     }
     stage('Deploy Image') {
       steps{
-         script {
-            docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
+          sh '''
+             docker tag petclinic poohacharya.jfrog.io/default-docker-virtual:petclinic
+             docker push poohacharya.jfrog.io/default-docker-virtual:petclinic
+          '''
+       // Push the docker image to artifactory repo.
         }
       }
     }
