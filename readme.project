@@ -4,11 +4,11 @@ add the center repo (https://jcenter.bintray.com)
 
 
 Jenkins Pipeline:
-Declarative: Checkout SCM	- this stage checkout the code.
+Declarative: Checkout SCM	- this stage will checkout the code.
 Declarative: Tool Install	- this stage installs the required tools (maven/jdk)
 Cloning Git	- this stage clones the git repo https://github.com/poohacharya/pet12
 Compile	- this stage compiles the src code.
-clean install	-  This stage will test and package the application in its distributable format, it saves it in local repository. 
+test	-  This stage will run the  tests.
 package	- This stage will test and package the application in its distributable format, it will then be used to push to artifactory
 Publish To Artifactory	- This stage will push the app.jar to artifactory.
 Building Image	- This stage will containerize the app and build the docker image.
