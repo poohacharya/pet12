@@ -20,14 +20,14 @@ pipeline {
          sh 'mvn compile' //only compilation of the code
        }
     }
-    stage('install') {
+    stage('test') {
       steps {
         sh '''
-        mvn clean install
+        mvn test
         ls
         pwd
         ''' 
-        //if the code is compiled, we test and package it in its distributable format; run IT and store in local repository
+       //test code
       }
     }
     stage('package') {
